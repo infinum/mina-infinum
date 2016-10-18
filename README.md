@@ -1,5 +1,6 @@
 # Mina::Infinum
 
+For `mina 0.3.0` please take a look at [v0.3.0 branch](https://github.com/infinum/mina-infinum/tree/v0.3.0)
 ## Plugins
 
 ``` ruby
