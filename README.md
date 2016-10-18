@@ -1,11 +1,25 @@
 # Mina::Infinum
 
-Plugins included:
+## Plugins
 
-    'mina', '0.3.8'
-    'mina-delayed_job', '~> 0.1.0'
-    'mina-data_sync', '~> 0.4.1'
-    'mina-secrets', '~> 0.2.0'
+``` ruby
+'mina', '~> 1.0.0'
+'mina-data_sync', '~> 1.0.0'
+'mina-secrets', '~> 1.0.0'
+'mina-whenever', '~> 1.0.0'
+```
+
+Removed mina-delayed_job as we are moving towards delayed_job in processes.
+
+## Tasks
+
+``` ruby
+:restart_application  # restart passenger
+```
+
+## Contributing
+
+Feel free to add your own tasks
 
 ## License
 

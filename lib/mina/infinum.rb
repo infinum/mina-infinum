@@ -1,7 +1,7 @@
-require "mina/infinum/version"
+require 'mina/infinum/version'
+require 'mina/infinum/tasks'
 
 module Mina
   module Infinum
-    # Your code goes here...
   end
 end
