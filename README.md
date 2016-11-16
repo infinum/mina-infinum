@@ -12,10 +12,27 @@ For `mina 0.3.0` please take a look at [v0.3.0 branch](https://github.com/infinu
 
 Removed mina-delayed_job as we are moving towards delayed_job in processes.
 
+## Setup
+
+``` ruby
+set :application_name # Used in background workers tasks
+set :background_worker # Used in background workers tasks
+```
+
+Background workers name:
+
+```ruby
+[fetch(:background_worker), fetch(:application_name), fetch(:rails_env)].join('-') # dj-labs-production
+```
+
 ## Tasks
 
 ``` ruby
 :restart_application  # restart passenger
+:'background_workers:restart'
+:'background_workers:start'
+:'background_workers:stop'
+:'background_workers:status'
 ```
 
 ## Contributing
