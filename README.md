@@ -11,12 +11,12 @@ For `mina 0.3.0` please take a look at [v0.3.0 branch](https://github.com/infinu
 ```
 
 Removed mina-delayed_job as we are moving towards delayed_job in processes.
-
+github
 ## Setup
 
 ``` ruby
-set :application_name # Used in background workers tasks
-set :background_worker # Used in background workers tasks
+set :application_name        # Used in background workers tasks
+set :background_worker, 'dj' # Used in background workers tasks (Default: 'dj')
 ```
 
 Background workers name:

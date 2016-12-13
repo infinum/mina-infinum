@@ -1,7 +1,7 @@
 def background_worker(state)
   ensure!(:background_worker)
   ensure!(:application_name)
-  comment %(Restarting delayed job)
+  comment %(#{state}ing #{background_worker_name})
   command %(sudo #{state} #{background_worker_name})
 end
 
