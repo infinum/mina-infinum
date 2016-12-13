@@ -15,8 +15,8 @@ github
 ## Setup
 
 ``` ruby
-set :application_name        # Used in background workers tasks
-set :background_worker, 'dj' # Used in background workers tasks (Default: 'dj')
+set :application_name, <APP_NAME>     # Used in background workers tasks
+set :background_worker, <WORKER_NAME> # Used in background workers tasks (eg. 'dj')
 ```
 
 Background workers name:
