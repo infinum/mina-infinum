@@ -31,6 +31,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_dependency 'mina', '~> 1.0'
   spec.add_dependency 'mina-data_sync', '~> 1.0'
-  spec.add_dependency 'mina-secrets', '~> 1.0'
+  spec.add_dependency 'mina-secrets', '~> 1.1'
   spec.add_dependency 'mina-whenever', '~> 1.0'
 end
