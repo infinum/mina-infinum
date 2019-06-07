@@ -17,6 +17,7 @@ github
 ``` ruby
 set :application_name, <APP_NAME>        # Used in background workers tasks
 set :background_worker, <WORKER_NAME>    # Used in background workers tasks (eg. 'dj')
+set :service_manager, <SERVICE_MANAGER>  # systemd (default), upstart
 ```
 
 Background workers name:
