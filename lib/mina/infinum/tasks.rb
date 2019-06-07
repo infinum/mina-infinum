@@ -1,4 +1,4 @@
-set :service_manager, :systemd
+set :service_manager, :upstart
 
 desc 'Restart application'
 task :restart_application do
