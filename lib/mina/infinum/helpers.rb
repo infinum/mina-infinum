@@ -3,8 +3,9 @@ def background_worker(state)
   ensure!(:application_name)
   ensure!(:service_manager)
   comment %(#{state}ing #{background_worker_name})
+  service_manager = fetch(:service_manager).to_sym
 
-  case fetch(:service_manager)
+  case service_manager
   when :systemd
     case state
     when :status
@@ -20,6 +21,8 @@ def background_worker(state)
     else
       command %(sudo #{state} #{background_worker_name})
     end
+  else
+    raise StandardError.new "Invalid service_manager: #{service_manager}.\nSupported service managers: systemd, upstart."
   end
 end
 
