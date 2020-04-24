@@ -26,12 +26,12 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler', '~> 1.12'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_dependency 'mina', '~> 1.0'
-  spec.add_dependency 'mina-data_sync', '~> 1.0'
-  spec.add_dependency 'mina-dox', '~> 0.1'
-  spec.add_dependency 'mina-secrets', '~> 1.2'
-  spec.add_dependency 'mina-whenever', '~> 1.0'
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
+  spec.add_dependency 'mina', '> 1.0'
+  spec.add_dependency 'mina-data_sync'
+  spec.add_dependency 'mina-dox'
+  spec.add_dependency 'mina-secrets'
+  spec.add_dependency 'mina-whenever'
 end
