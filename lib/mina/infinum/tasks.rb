@@ -1,5 +1,5 @@
-set :service_manager, :upstart
 set :sidekiq_web_namespace, nil
+set :service_manager, :systemd
 
 desc 'Restart application'
 task :restart_application do
