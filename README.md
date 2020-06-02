@@ -15,9 +15,10 @@ github
 ## Setup
 
 ``` ruby
-set :application_name, <APP_NAME>        # Used in background workers tasks
-set :background_worker, <WORKER_NAME>    # Used in background workers tasks (eg. 'dj')
-set :service_manager, <SERVICE_MANAGER>  # systemd, upstart (default)
+set :application_name, <APP_NAME>                # Used in background workers tasks
+set :background_worker, <WORKER_NAME>            # Used in background workers tasks (eg. 'dj')
+set :service_manager, <SERVICE_MANAGER>          # systemd, upstart (default)
+set :sidekiq_web_namespace, <SIDEKIQ_WEB_MOUNT>  # Used for creating symlink to Sidekiq assets in public/
 ```
 
 Background workers name:
@@ -34,6 +35,7 @@ Background workers name:
 :'background_workers:start'
 :'background_workers:stop'
 :'background_workers:status'
+:link_sidekiq_assets
 ```
 
 ## Contributing
