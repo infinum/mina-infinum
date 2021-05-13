@@ -23,3 +23,12 @@ task :link_sidekiq_assets do
   command "mkdir -p #{custom_assets_path}"
   command "ln -nfs $bundle_path/web/assets #{custom_assets_path}/sidekiq"
 end
+
+namespace :bundle do
+  desc 'Install bundler'
+  task :install_gem do
+    comment 'Installing bundler'
+    command 'bundler_version=`tail -n 1 Gemfile.lock | xargs`'
+    command 'gem install bundler:$bundler_version --no-document'
+  end
+end
