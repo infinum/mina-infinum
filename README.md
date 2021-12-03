@@ -17,7 +17,7 @@ github
 ``` ruby
 set :application_name, <APP_NAME>                # Used in background workers tasks
 set :background_worker, <WORKER_NAME>            # Used in background workers tasks (eg. 'dj')
-set :service_manager, <SERVICE_MANAGER>          # systemd, upstart (default)
+set :service_manager, <SERVICE_MANAGER>          # systemd (default), upstart
 set :sidekiq_web_namespace, <SIDEKIQ_WEB_MOUNT>  # Used for creating symlink to Sidekiq assets in public/
 ```
 
