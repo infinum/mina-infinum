@@ -1,10 +1,10 @@
 require 'mina/infinum/ecs/ecs'
 
 desc 'Execute a rails command'
-task :rails do |_, args|
+task :rails, [:command] do |_, args|
   ensure!(:rails_env)
 
-  command = args.to_a.fetch(0) { error! "Provide a command as argument" }
+  command = args.fetch(:command) { error! 'Command is a required argument' }
 
   invoke 'ecs:exec', "bundle exec rails #{command}"
 end

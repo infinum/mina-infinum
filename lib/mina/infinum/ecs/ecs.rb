@@ -3,11 +3,11 @@ require 'mina/infinum/ecs/aws'
 
 namespace :ecs do
   desc 'Execute a command on ECS container'
-  task exec: ['aws:profile:check'] do |_, args|
+  task :exec, [:command] => ['aws:profile:check'] do |_, args|
     ensure!(:cluster)
     ensure!(:service)
 
-    command = args.to_a.fetch(0) { error! "You must provide a command as task argument" }
+    command = args.fetch(:command) { error! 'Command is a required argument' }
 
     task_arn = find_task_arn
 
