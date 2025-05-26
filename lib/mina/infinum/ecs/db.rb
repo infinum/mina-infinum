@@ -2,7 +2,7 @@ require 'mina/infinum/ecs/aws'
 
 namespace :db do
   desc 'Forward remote DB port to local port through an SSM session'
-  task proxy: ['aws:profile:check'] do |_, args|
+  task proxy: ['aws:profile:check'] do
     ensure!(:aws_bastion_id)
     ensure!(:db_host)
 
@@ -10,7 +10,7 @@ namespace :db do
     bastion_id = fetch(:aws_bastion_id)
     host = fetch(:db_host)
     remote_port = fetch(:db_port, 5432)
-    local_port = args.to_a.fetch(0) { fetch(:db_tunnel_port, 9999) }
+    local_port = fetch(:db_tunnel_port, 9999)
 
     Kernel.exec squish(<<~CMD)
       aws ssm start-session
