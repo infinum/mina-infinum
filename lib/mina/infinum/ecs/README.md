@@ -30,7 +30,14 @@ end
 To find available tasks, run `bundle exec mina --tasks`.
 To read detailed task descriptions, run `bundle exec mina --describe/-D`.
 
-To see debug output of AWS commands, append `debug=true` to command, e.g.: `bundle exec mina staging db:proxy debug=true`.
+To see debug output, append `debug=true` to command, e.g.: `bundle exec mina staging db:proxy debug=true`:
+```
+$ bundle exec mina staging db:proxy debug=true
+
+2025-05-27 09:32:14,455 - MainThread - awscli.clidriver - DEBUG - CLI version: aws-cli/2.2.6 Python/3.8.8 Darwin/24.5.0 exe/x86_64
+2025-05-27 09:32:14,455 - MainThread - awscli.clidriver - DEBUG - Arguments entered to CLI: ['configure', 'list-profiles', '--debug']
+# and so on...
+```
 
 To see commands before they run, append `verbose=true`, e.g.: `bundle exec mina staging db:proxy verbose=true`:
 ```
