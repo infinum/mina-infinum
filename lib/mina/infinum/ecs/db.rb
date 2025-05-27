@@ -10,7 +10,7 @@ namespace :db do
     bastion_id = fetch(:aws_bastion_id)
     host = fetch(:db_host)
     remote_port = fetch(:db_port, 5432)
-    local_port = fetch(:db_tunnel_port, 9999)
+    local_port = fetch(:db_local_port, 9999)
 
     run_cmd squish(<<~CMD), exec: true
       aws ssm start-session
