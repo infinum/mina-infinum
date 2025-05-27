@@ -11,7 +11,7 @@ namespace :ecs do
 
     task_arn = find_task_arn
 
-    Kernel.exec squish(<<~CMD)
+    run_cmd squish(<<~CMD), exec: true
       aws ecs execute-command
         --task #{task_arn}
         --command \"#{command}\"
@@ -30,7 +30,7 @@ namespace :ecs do
 end
 
 def find_task_arn
-  output = Kernel.` squish(<<~CMD)
+  output = run_cmd squish(<<~CMD)
     aws ecs list-tasks
       --output json
       --cluster #{fetch(:cluster)}

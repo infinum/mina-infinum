@@ -4,7 +4,7 @@ set :debug, false
 
 namespace :aws do
   task :ensure_cli_version do
-    version = `aws --version #{'--debug' if debug?}`
+    version = run_cmd "aws --version #{'--debug' if debug?}"
 
     error! 'AWS CLI version 2 is required' unless version.start_with?('aws-cli/2')
 
@@ -17,7 +17,7 @@ namespace :aws do
 
     login_profile = fetch(:aws_login_profile, fetch(:aws_source_profile))
 
-    Kernel.exec "aws sso login --profile #{login_profile}"
+    run_cmd "aws sso login --profile #{login_profile}", exec: true
   end
 
   desc 'Open AWS console in the browser'
@@ -26,7 +26,7 @@ namespace :aws do
 
     region = fetch(:aws_region)
 
-    Kernel.exec "open https://#{region}.console.aws.amazon.com/console/home?region=#{region}"
+    run_cmd "open https://#{region}.console.aws.amazon.com/console/home?region=#{region}", exec: true
   end
 
   namespace :profile do
@@ -53,9 +53,9 @@ namespace :aws do
         puts "Profile '#{fetch(:aws_profile)}' already exists, add 'force=true' to overwrite it"
       else
         puts "Creating profile '#{fetch(:aws_profile)}'..."
-        `aws configure set source_profile #{fetch(:aws_source_profile)} --profile #{fetch(:aws_profile)} #{'--debug' if debug?}`
-        `aws configure set region #{fetch(:aws_source_profile)} --profile #{fetch(:aws_profile)} #{'--debug' if debug?}`
-        `aws configure set role_arn #{fetch(:aws_source_profile)} --profile #{fetch(:aws_profile)} #{'--debug' if debug?}`
+        run_cmd "aws configure set source_profile #{fetch(:aws_source_profile)} --profile #{fetch(:aws_profile)} #{'--debug' if debug?}"
+        run_cmd "aws configure set region #{fetch(:aws_source_profile)} --profile #{fetch(:aws_profile)} #{'--debug' if debug?}"
+        run_cmd "aws configure set role_arn #{fetch(:aws_source_profile)} --profile #{fetch(:aws_profile)} #{'--debug' if debug?}"
         puts 'Done'
       end
     end
@@ -63,13 +63,9 @@ namespace :aws do
 end
 
 def profile_exists?(profile)
-  profiles = `aws configure list-profiles #{'--debug' if debug?}`
+  profiles = run_cmd "aws configure list-profiles #{'--debug' if debug?}"
 
   error! 'Cannot list AWS profiles' unless $CHILD_STATUS.success?
 
   profiles.split("\n").include?(profile)
-end
-
-def debug?
-  fetch(:debug, false)
 end

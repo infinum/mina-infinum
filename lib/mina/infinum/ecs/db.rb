@@ -12,7 +12,7 @@ namespace :db do
     remote_port = fetch(:db_port, 5432)
     local_port = fetch(:db_tunnel_port, 9999)
 
-    Kernel.exec squish(<<~CMD)
+    run_cmd squish(<<~CMD), exec: true
       aws ssm start-session
         --target #{bastion_id}
         --document-name AWS-StartPortForwardingSessionToRemoteHost
