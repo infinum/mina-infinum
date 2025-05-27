@@ -27,6 +27,19 @@ task :production do
 end
 ```
 
-To see available tasks, run `bundle exec mina --tasks`.
+To find available tasks, run `bundle exec mina --tasks`.
+To read detailed task descriptions, run `bundle exec mina --describe/-D`.
 
-To see debug output, append `debug=true` to command, e.g.: `bundle exec mina staging db:proxy debug=true`.
+To see debug output of AWS commands, append `debug=true` to command, e.g.: `bundle exec mina staging db:proxy debug=true`.
+
+To see commands before they run, append `verbose=true`, e.g.: `bundle exec mina staging db:proxy verbose=true`:
+```
+$ bundle exec mina staging db:proxy verbose=true
+
+  $ aws configure list-profiles
+  $ aws ssm start-session --target aws_bastion_id --document-name AWS-StartPortForwardingSessionToRemoteHost --parameters host="db_host",portNumber="5432",localPortNumber="9999" --profile aws_profile
+
+Starting session with SessionId: botocore-session-12345
+Port 9999 opened for sessionId botocore-session-12345.
+Waiting for connections...
+```
