@@ -2,7 +2,15 @@ require 'json'
 require 'mina/infinum/ecs/aws'
 
 namespace :ecs do
-  desc 'Execute a command on ECS container'
+  desc <<~TXT
+    Execute a command on ECS container
+
+    Executes command :command on the running ECS task in cluster :cluster
+    for service :service using profile :aws_profile.
+
+    Command is provided as a rake task argument:
+    $ mina "ecs:exec[container_cmd]"
+  TXT
   task :exec, [:command] => ['aws:profile:check'] do |_, args|
     ensure!(:cluster)
     ensure!(:service)
@@ -18,12 +26,17 @@ namespace :ecs do
         --cluster #{fetch(:cluster)}
         --profile #{fetch(:aws_profile)}
         --interactive
-        #{"--container #{fetch(:container)}" if fetch(:container)}
         #{'--debug' if debug?}
     CMD
   end
 
-  desc 'Connect to the ECS container'
+  desc <<~TXT
+    Connect to the ECS container
+
+    Uses ecs:exec task to start a shell on the container.
+
+    The shell is defined with :shell (default is "bash").
+  TXT
   task :connect do
     invoke 'ecs:exec', fetch(:shell, 'bash')
   end

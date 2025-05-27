@@ -11,7 +11,15 @@ namespace :aws do
     puts "AWS CLI v2 is intalled. Version: #{version}" if debug?
   end
 
-  desc 'Log in to AWS'
+  desc <<~TXT
+    Log in to AWS
+
+    Retrieves an SSO access token from AWS. Prerequisite for any task
+    which requires authentication (for example, ecs:connect).
+
+    Logs in with profile :aws_login_profile if defined, otherwise uses
+    :aws_source_profile.
+  TXT
   task login: [:ensure_cli_version] do
     ensure!(:aws_source_profile)
 
@@ -38,7 +46,17 @@ namespace :aws do
       end
     end
 
-    desc 'Create AWS profile'
+    desc <<~TXT
+      Create AWS profile
+
+      Creates profile :aws_profile on local machine. Prerequisite for
+      any task which uses AWS resources (for example, ecs:connect).
+
+      The profile is set up with parameters:
+      - source_profile -> :aws_source_profile
+      - region -> :aws_region
+      - role_arn -> :aws_role_arn
+    TXT
     task create: [:ensure_cli_version] do
       ensure!(:aws_profile)
       ensure!(:aws_source_profile)
@@ -54,8 +72,8 @@ namespace :aws do
       else
         puts "Creating profile '#{fetch(:aws_profile)}'..."
         run_cmd "aws configure set source_profile #{fetch(:aws_source_profile)} --profile #{fetch(:aws_profile)} #{'--debug' if debug?}"
-        run_cmd "aws configure set region #{fetch(:aws_source_profile)} --profile #{fetch(:aws_profile)} #{'--debug' if debug?}"
-        run_cmd "aws configure set role_arn #{fetch(:aws_source_profile)} --profile #{fetch(:aws_profile)} #{'--debug' if debug?}"
+        run_cmd "aws configure set region #{fetch(:aws_region)} --profile #{fetch(:aws_profile)} #{'--debug' if debug?}"
+        run_cmd "aws configure set role_arn #{fetch(:aws_role_arn)} --profile #{fetch(:aws_profile)} #{'--debug' if debug?}"
         puts 'Done'
       end
     end

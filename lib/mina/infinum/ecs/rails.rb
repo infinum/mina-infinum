@@ -1,6 +1,14 @@
 require 'mina/infinum/ecs/ecs'
 
 desc 'Execute a rails command'
+desc <<~TXT
+  Execute a rails command
+
+  Uses ecs:exec task to execute rails command on the container.
+
+  Command is provided as a rake task argument:
+  $ mina "rails[command]"
+TXT
 task :rails, [:command] do |_, args|
   ensure!(:rails_env)
 
