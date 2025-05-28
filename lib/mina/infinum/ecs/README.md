@@ -8,7 +8,7 @@ Tasks are split in several namespaces:
 - `ecs`: interaction with ECS containers (e.g. running commands)
 - `rails`: interaction with Rails apps on ECS containers (e.g. opening the console)
 
-To find available tasks, run `bundle exec mina --tasks`.
+To find available tasks, run `bundle exec mina --tasks`.<br />
 To read detailed task descriptions, run `bundle exec mina --describe/-D`.
 
 ## Setup
