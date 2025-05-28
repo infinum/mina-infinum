@@ -31,7 +31,7 @@ set :service, 'service_name'
 
 task :staging do
   set :rails_env, 'staging'
-  set :aws_bastion_id, 'i-ec2_instance_id'
+  set :aws_jump_server_id, 'i-ec2_instance_id'
   set :db_host, 'production_db_host'
   # set :db_port, 3306 (default: 5432)
   set :cluster, 'production_cluster_name'
@@ -39,7 +39,7 @@ end
 
 task :production do
   set :rails_env, 'production'
-  set :aws_bastion_id, 'i-ec2_instance_id'
+  set :aws_jump_server_id, 'i-ec2_instance_id'
   set :db_host, 'production_db_host'
   # set :db_port, 3306 (default: 5432)
   set :cluster, 'production_cluster_name'
@@ -64,7 +64,7 @@ To see commands before they run, append `verbose=true`, e.g.: `bundle exec mina 
 $ bundle exec mina staging db:proxy verbose=true
 
   $ aws configure list-profiles
-  $ aws ssm start-session --target aws_bastion_id --document-name AWS-StartPortForwardingSessionToRemoteHost --parameters host="db_host",portNumber="5432",localPortNumber="9999" --profile aws_profile
+  $ aws ssm start-session --target aws_jump_server_id --document-name AWS-StartPortForwardingSessionToRemoteHost --parameters host="db_host",portNumber="5432",localPortNumber="9999" --profile aws_profile
 
 Starting session with SessionId: botocore-session-12345
 Port 9999 opened for sessionId botocore-session-12345.
