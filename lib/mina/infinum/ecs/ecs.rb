@@ -5,11 +5,11 @@ namespace :ecs do
   desc <<~TXT
     Execute a command on ECS container
 
-    Executes command :command on the running ECS task in cluster :cluster
-    for service :service using profile :aws_profile.
+    Executes command :command in interactive mode on container in active
+    task on cluster :cluster for service :service. Uses profile :aws_profile.
 
     Command is provided as a rake task argument:
-    $ mina "ecs:exec[container_cmd]"
+    $ mina "ecs:exec[command]"
   TXT
   task :exec, [:command] => ['aws:profile:check'] do |_, args|
     ensure!(:cluster)
@@ -35,7 +35,7 @@ namespace :ecs do
 
     Uses ecs:exec task to start a shell on the container.
 
-    The shell is defined with :shell (default is "bash").
+    The shell is defined with :shell (default: 'bash').
   TXT
   task :connect do
     invoke 'ecs:exec', fetch(:shell, 'bash')

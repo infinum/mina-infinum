@@ -6,7 +6,7 @@ namespace :db do
 
     Connects to the AWS resource :aws_bastion_id through an SSM session
     and forwards port :db_port (default: 5432) on host :db_host to local
-    port :db_local_port (default: 9999).
+    port :db_local_port (default: 9999). Uses profile :aws_profile.
 
     You can override local port in config/deploy.rb, or inline:
     $ mina db:proxy db_local_port=4242

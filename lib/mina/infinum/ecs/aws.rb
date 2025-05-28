@@ -28,7 +28,11 @@ namespace :aws do
     run_cmd "aws sso login --profile #{login_profile}", exec: true
   end
 
-  desc 'Open AWS console in the browser'
+  desc <<~TXT
+    Open AWS console in the browser
+
+    The console is opened in region :aws_region.
+  TXT
   task console: ['profile:check'] do
     ensure!(:aws_region)
 

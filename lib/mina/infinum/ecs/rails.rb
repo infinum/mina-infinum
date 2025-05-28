@@ -2,12 +2,14 @@ require 'mina/infinum/ecs/ecs'
 
 desc 'Execute a rails command'
 desc <<~TXT
-  Execute a rails command
+  Execute a Rails command
 
-  Uses ecs:exec task to execute rails command on the container.
+  Uses ecs:exec task to execute a Rails command on the container.
 
   Command is provided as a rake task argument:
   $ mina "rails[command]"
+  and is executed on the container as:
+  $ bundle exec rails [command]
 TXT
 task :rails, [:command] do |_, args|
   ensure!(:rails_env)
@@ -18,12 +20,20 @@ task :rails, [:command] do |_, args|
 end
 
 namespace :rails do
-  desc 'Open rails console'
+  desc <<~TXT
+    Open rails console
+
+    Runs "bundle exec rails console" on the ECS container.
+  TXT
   task :console do
     invoke 'rails', 'console'
   end
 
-  desc 'Tail application log'
+  desc <<~TXT
+    Tail application log
+
+    Log is tailed from `log` folder for environment :rails_env.
+  TXT
   task :log do
     ensure!(:rails_env)
 

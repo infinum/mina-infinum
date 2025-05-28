@@ -2,6 +2,12 @@ require 'mina/default'
 require 'mina/infinum/ecs/rails'
 require 'mina/infinum/ecs/db'
 
+# INFO: hides default Mina tasks when running "mina --tasks"
+Rake::Task['run'].clear_comments
+Rake::Task['ssh'].clear_comments
+Rake::Task['ssh_keyscan_domain'].clear_comments
+Rake::Task['ssh_keyscan_repo'].clear_comments
+
 def squish(command)
   command.gsub(/[[:space:]]+/, ' ').strip
 end
