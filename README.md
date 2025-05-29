@@ -1,6 +1,11 @@
 # Mina::Infinum
 
 For `mina 0.3.0` please take a look at [v0.3.0 branch](https://github.com/infinum/mina-infinum/tree/v0.3.0)
+
+## ECS
+
+For ECS-related setup, see [this README](lib/mina/infinum/ecs/README.md).
+
 ## Plugins
 
 * [mina](https://github.com/mina-deploy/mina), '> 1.0'
