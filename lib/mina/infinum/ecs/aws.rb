@@ -46,7 +46,7 @@ namespace :aws do
       ensure!(:aws_profile)
 
       unless profile_exists?(fetch(:aws_profile))
-        error! "Please create AWS profile '#{fetch(:aws_profile)}' first (use `aws:profile:create` task)"
+        error! "Please create AWS profile '#{fetch(:aws_profile)}' first (use task aws:profile:create)"
       end
     end
 

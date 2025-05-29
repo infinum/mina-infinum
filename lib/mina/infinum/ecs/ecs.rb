@@ -53,7 +53,7 @@ def find_task_arn
   CMD
 
   unless $CHILD_STATUS.success?
-    error! 'Cannot list ECS tasks, see above error (set --debug flag for more info)'
+    error! "Cannot list ECS tasks... do you need to log in (use task aws:login)? For more info, add debug=true to command"
   end
 
   JSON.parse(output).dig('taskArns', 0) || error!('There are no task definitions')
