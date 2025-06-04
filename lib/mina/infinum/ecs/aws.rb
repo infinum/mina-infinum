@@ -91,3 +91,6 @@ def profile_exists?(profile)
 
   profiles.split("\n").include?(profile)
 end
+
+desc 'Alias for aws:login'
+task :login => 'aws:login'

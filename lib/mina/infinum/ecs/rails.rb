@@ -40,3 +40,6 @@ namespace :rails do
     invoke 'ecs:exec', "tail -f log/#{fetch(:rails_env)}.log"
   end
 end
+
+desc 'Alias for rails:console'
+task :console => 'rails:console'
