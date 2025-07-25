@@ -1,6 +1,7 @@
 require 'mina/default'
 require 'mina/infinum/ecs/rails'
 require 'mina/infinum/ecs/db'
+require 'mina/infinum/ecs/params'
 
 # INFO: hides default Mina tasks when running "mina --tasks"
 Rake::Task['run'].clear_comments

@@ -21,7 +21,7 @@ end
 
 namespace :rails do
   desc <<~TXT
-    Open rails console
+    Open Rails console
 
     Runs "bundle exec rails console" on the ECS container.
   TXT
