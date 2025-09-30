@@ -34,4 +34,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mina-dox'
   spec.add_dependency 'mina-secrets'
   spec.add_dependency 'mina-whenever'
+  spec.add_dependency 'rainbow'
 end

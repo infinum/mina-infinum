@@ -1,5 +1,6 @@
 require 'mina/default'
 require 'mina/infinum/ecs/rails'
+require 'mina/infinum/ecs/logs'
 require 'mina/infinum/ecs/db'
 require 'mina/infinum/ecs/params'
 
