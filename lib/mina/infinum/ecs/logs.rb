@@ -11,15 +11,18 @@ desc <<~TXT
   parseable by `Time.parse` (e.g. ISO8601 timestamps). :since is required,
   :until is optional (if omitted, value will be current time).
 
-  Some examples:
+  Examples:
   # all logs since 26.9.2025. 14:00 (local time zone) until now
   $ mina logs since="2025-09-26 14:00"
 
   # all logs on 26.9.2025. between 14:00 and 15:00
   $ mina logs since="2025-09-26 14:00" until="2025-09-26 15:00"
 
-  # all logs between 14:00 and 15:00 today
+  # all logs between 14:00 and 15:00 today in local time zone
   $ mina logs since="14:00" until="15:00"
+
+  # all logs between 14:00 and 15:00 today in UTC
+  $ mina logs since="14:00Z" until="15:00Z"
 
   # UTC time zone
   $ mina logs since="2025-09-26T14:00Z"
