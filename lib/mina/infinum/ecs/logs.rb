@@ -12,19 +12,19 @@ desc <<~TXT
   :until is optional (if omitted, value will be current time).
 
   Examples:
-  # all logs since 26.9.2025. 14:00 (local time zone) until now
+  # logs since 26.9.2025. 14:00 in local time zone
   $ mina logs since="2025-09-26 14:00"
 
-  # all logs on 26.9.2025. between 14:00 and 15:00
+  # logs on 26.9.2025. between 14:00 and 15:00 in local time zone
   $ mina logs since="2025-09-26 14:00" until="2025-09-26 15:00"
 
-  # all logs between 14:00 and 15:00 today in local time zone
+  # logs between 14:00 and 15:00 today in local time zone
   $ mina logs since="14:00" until="15:00"
 
-  # all logs between 14:00 and 15:00 today in UTC
+  # logs between 14:00 and 15:00 today in UTC
   $ mina logs since="14:00Z" until="15:00Z"
 
-  # UTC time zone
+  # logs since 26.9.2025. 14:00 in UTC (ISO 8601 format)
   $ mina logs since="2025-09-26T14:00Z"
 TXT
 task logs: ['aws:profile:check'] do
@@ -65,10 +65,20 @@ namespace :logs do
     Logs are tailed from :log_group, which is a CloudWatch log group name.
 
     Before new logs are tailed, recent logs are first printed. You can control
-    from what time recent logs are printed with :since. The value can be an
-    ISO 8601 timestamp or a relative time. For example:
-    $ mina logs:tail since="2025-09-26T12:00:00"
-    or
+    from what time recent logs are printed with :since. The value can be absolute
+    time parseable by `Time.parse`, or relative time.
+
+    Examples:
+    # tail logs since 26.9.2025. 14:00 in local time zone
+    $ mina logs:tail since="2025-09-26 14:00"
+
+    # tail logs since 14:00 today in local time zone
+    $ mina logs:tail since="14:00"
+
+    # tail logs since 26.9.2025. 14:00 in UTC (ISO 8601 format)
+    $ mina logs:tail since="2025-09-26T14:00Z"
+
+    # tail logs since 5 minutes ago
     $ mina logs:tail since="5m"
 
     For more info on accepted :since values, see --since options
@@ -77,13 +87,19 @@ namespace :logs do
   task tail: ['aws:profile:check'] do
     ensure!(:log_group)
 
+    since_time = fetch(:since).strip
+
+    if !since_time.empty? && !since_time.match?(/\A\d+\w\z/)
+      since_time = Time.parse(since_time).iso8601
+    end
+
     puts "Tailing logs from #{fetch(:log_group)}"
     run_cmd squish(<<~CMD), exec: true
       aws logs tail #{fetch(:log_group)}
         --profile #{fetch(:aws_profile)}
         --follow
         --format short
-        #{"--since #{fetch(:since)}" if fetch(:since)}
+        #{"--since #{since_time}" if since_time}
     CMD
   end
 end
