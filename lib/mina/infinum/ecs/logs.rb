@@ -11,6 +11,8 @@ desc <<~TXT
   parseable by `Time.parse` (e.g. ISO8601 timestamps). :since is required,
   :until is optional (if omitted, value will be current time).
 
+  If date is ommitted in either value, the current date is assumed.
+
   Examples:
   # logs since 26.9.2025. 14:00 in local time zone
   $ mina logs since="2025-09-26 14:00"
@@ -67,6 +69,8 @@ namespace :logs do
     Before new logs are tailed, recent logs are first printed. You can control
     from what time recent logs are printed with :since. The value can be absolute
     time parseable by `Time.parse`, or relative time.
+
+    If date is ommitted in absolute time, the current date is assumed.
 
     Examples:
     # tail logs since 26.9.2025. 14:00 in local time zone
