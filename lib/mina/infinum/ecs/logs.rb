@@ -1,4 +1,3 @@
-require 'rainbow'
 require 'time'
 require 'mina/infinum/ecs/aws'
 
@@ -53,7 +52,7 @@ task logs: ['aws:profile:check'] do
   if logs.any?
     logs.each do |log|
       time = Time.at(0, log.fetch('timestamp'), :millisecond)
-      puts "#{Rainbow(time.utc.iso8601).green} #{log.fetch('message')}"
+      puts "#{green_text(time.utc.iso8601)} #{log.fetch('message')}"
     end
   else
     puts 'There are no logs'
@@ -106,4 +105,8 @@ namespace :logs do
         #{"--since #{since_time}" if since_time}
     CMD
   end
+end
+
+def green_text(text)
+  "\e[32m#{text}\e[0m"
 end
