@@ -1,5 +1,12 @@
 # Changelog
 
+## [v2.3.0](https://github.com/infinum/mina-infinum/tree/v-2.3.0) (2025-10-02)
+[Full Changelog](https://github.com/infinum/mina-infinum/compare/v2.2.0...v2.3.0)
+
+### Enhancements
+
+- Add logs and logs:tail AWS tasks [\#8](https://github.com/infinum/mina-infinum/pull/8)
+
 ## [v2.2.0](https://github.com/infinum/mina-infinum/tree/v-2.2.0) (2025-07-25)
 [Full Changelog](https://github.com/infinum/mina-infinum/compare/v2.1.0...v2.2.0)
 
