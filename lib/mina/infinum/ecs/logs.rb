@@ -90,9 +90,9 @@ namespace :logs do
   task tail: ['aws:profile:check'] do
     ensure!(:log_group)
 
-    since_time = fetch(:since).strip
+    since_time = fetch(:since)&.strip
 
-    if !since_time.empty? && !since_time.match?(/\A\d+\w\z/)
+    if since_time && !since_time.empty? && !since_time.match?(/\A\d+\w\z/)
       since_time = Time.parse(since_time).iso8601
     end
 
