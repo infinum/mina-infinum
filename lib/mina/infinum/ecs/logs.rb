@@ -39,7 +39,7 @@ task logs: ['aws:profile:check'] do
   raw_logs = run_cmd squish(<<~CMD)
     aws logs filter-log-events
       --log-group-name #{fetch(:log_group)}
-      --profile #{fetch(:aws_profile)}
+      #{aws_cli_profile_flag}
       --start-time #{since_time.strftime('%s%L')}
       --end-time #{until_time.strftime('%s%L')}
       --output json
@@ -99,7 +99,7 @@ namespace :logs do
     puts "Tailing logs from #{fetch(:log_group)}"
     run_cmd squish(<<~CMD), exec: true
       aws logs tail #{fetch(:log_group)}
-        --profile #{fetch(:aws_profile)}
+        #{aws_cli_profile_flag}
         --follow
         --format short
         #{"--since #{since_time}" if since_time}
