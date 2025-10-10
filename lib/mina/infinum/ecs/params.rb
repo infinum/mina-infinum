@@ -25,6 +25,18 @@ namespace :params do
 
     File.write(env_file_path, get_params.map(&:as_env).join("\n"))
   end
+
+  desc <<~TXT
+    Save AWS Param Store params to .env file
+
+    See params:read documentation for details on how params
+    are fetched.
+  TXT
+  task :pull_via_role do
+    env_file_path = File.join(Dir.pwd, '.env')
+
+    File.write(env_file_path, get_params_via_role.map(&:as_env).join("\n"))
+  end
 end
 
 Param = Data.define(:name, :value) do
@@ -48,6 +60,10 @@ def normalize_params(raw_params)
   end
 end
 
+def get_params_via_role
+  normalize_params(get_params_from_aws_via_role)
+end
+
 def get_params_from_aws
   params_path = fetch(:params_path) || default_params_path
   output = run_cmd squish(<<~CMD)
@@ -56,6 +72,23 @@ def get_params_from_aws
       --with-decryption
       --recursive
       --profile #{fetch(:aws_profile)}
+      #{'--debug' if debug?}
+  CMD
+
+  unless $CHILD_STATUS.success?
+    error! "Cannot fetch params from AWS... do you need to log in (use task aws:login)? For more info, add debug=true to command"
+  end
+
+  JSON.parse(output).dig('Parameters') || error!('There are no params in the response')
+end
+
+def get_params_from_aws_via_role
+  params_path = fetch(:params_path) || default_params_path
+  output = run_cmd squish(<<~CMD)
+    aws ssm get-parameters-by-path
+      --path #{params_path}
+      --with-decryption
+      --recursive
       #{'--debug' if debug?}
   CMD
 
