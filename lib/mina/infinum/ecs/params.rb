@@ -35,7 +35,20 @@ namespace :params do
   task :pull_via_role do
     env_file_path = File.join(Dir.pwd, '.env')
 
-    File.write(env_file_path, get_params_via_role.map(&:as_env).join("\n"))
+    existing_params = if File.exist?(env_file_path)
+      File.readlines(env_file_path)
+        .map(&:strip)
+        .reject { |l| l.empty? || l.start_with?('#') }
+        .map { |l| l.split('=', 2) }
+        .to_h
+    else
+      {}
+    end
+
+    new_params = get_params_via_role.to_h { |p| [p.variable_name, p.value] }
+    merged_params = existing_params.merge(new_params).map { |name, value| Param.new(name: name, value: value) }
+
+    File.write(env_file_path, merged_params.map(&:as_env).join("\n"))
   end
 end
 
