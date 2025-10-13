@@ -15,7 +15,11 @@ namespace :params do
   end
 
   desc <<~TXT
-    Save AWS Param Store params to .env file
+    Save AWS Param Store params to a file
+
+    Params are by default stored to .env file, you can override
+    the location with :path. For example:
+    $ mina params:pull path=.env.local
 
     See params:read documentation for details on how params
     are fetched.
