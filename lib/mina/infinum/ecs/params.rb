@@ -21,7 +21,9 @@ namespace :params do
     are fetched.
   TXT
   task pull: ['aws:profile:check'] do
-    env_file_path = File.join(Dir.pwd, '.env')
+    path = fetch(:path) || '.env'
+
+    env_file_path = File.join(Dir.pwd, path)
 
     File.write(env_file_path, get_params.map(&:as_env).join("\n"))
   end
