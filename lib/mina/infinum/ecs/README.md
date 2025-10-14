@@ -70,3 +70,7 @@ Starting session with SessionId: botocore-session-12345
 Port 9999 opened for sessionId botocore-session-12345.
 Waiting for connections...
 ```
+
+## Skip profile
+
+To execute AWS CLI commands without the `--profile` flag, append `skip_profile=true` to your commands, e.g.: `bundle exec mina staging params:pull skip_profile=true`.
