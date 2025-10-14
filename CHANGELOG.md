@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.4.0](https://github.com/infinum/mina-infinum/tree/v-2.4.0) (2025-10-14)
+[Full Changelog](https://github.com/infinum/mina-infinum/compare/v2.3.0...v2.4.0)
+
+### Enhancements
+
+- Add `skip_profile` flag to call AWS CLI commands without a `--profile` flag [\#9](https://github.com/infinum/mina-infinum/pull/9)
+- Add path param to params:pull task [\#10](https://github.com/infinum/mina-infinum/pull/10)
+
 ## [v2.3.0](https://github.com/infinum/mina-infinum/tree/v-2.3.0) (2025-10-02)
 [Full Changelog](https://github.com/infinum/mina-infinum/compare/v2.2.0...v2.3.0)
 
