@@ -24,7 +24,7 @@ namespace :ecs do
         --task #{task_arn}
         --command \"#{command}\"
         --cluster #{fetch(:cluster)}
-        --profile #{fetch(:aws_profile)}
+        #{aws_cli_profile_flag}
         --interactive
         #{'--debug' if debug?}
     CMD
@@ -48,7 +48,7 @@ def find_task_arn
       --output json
       --cluster #{fetch(:cluster)}
       --service #{fetch(:service)}
-      --profile #{fetch(:aws_profile)}
+      #{aws_cli_profile_flag}
       #{'--debug' if debug?}
   CMD
 

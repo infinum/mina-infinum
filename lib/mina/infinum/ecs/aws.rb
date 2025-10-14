@@ -43,6 +43,8 @@ namespace :aws do
 
   namespace :profile do
     task :check do
+      next if fetch(:skip_profile)
+
       ensure!(:aws_profile)
 
       unless profile_exists?(fetch(:aws_profile))
@@ -90,6 +92,10 @@ def profile_exists?(profile)
   error! 'Cannot list AWS profiles' unless $CHILD_STATUS.success?
 
   profiles.split("\n").include?(profile)
+end
+
+def aws_cli_profile_flag
+  fetch(:aws_profile) && !fetch(:skip_profile) ? "--profile #{fetch(:aws_profile)}" : ''
 end
 
 desc 'Alias for aws:login'

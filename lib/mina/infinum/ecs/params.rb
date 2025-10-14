@@ -61,7 +61,7 @@ def get_params_from_aws
       --path #{params_path}
       --with-decryption
       --recursive
-      --profile #{fetch(:aws_profile)}
+      #{aws_cli_profile_flag}
       #{'--debug' if debug?}
   CMD
 

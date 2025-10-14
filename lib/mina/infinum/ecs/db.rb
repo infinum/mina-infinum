@@ -15,7 +15,6 @@ namespace :db do
     ensure!(:aws_jump_server_id)
     ensure!(:db_host)
 
-    profile = fetch(:aws_profile)
     jump_server_id = fetch(:aws_jump_server_id)
     host = fetch(:db_host)
     remote_port = fetch(:db_port, 5432)
@@ -26,7 +25,7 @@ namespace :db do
         --target #{jump_server_id}
         --document-name AWS-StartPortForwardingSessionToRemoteHost
         --parameters host="#{host}",portNumber="#{remote_port}",localPortNumber="#{local_port}"
-        --profile #{profile}
+        #{aws_cli_profile_flag}
         #{'--debug' if debug?}
     CMD
   end
