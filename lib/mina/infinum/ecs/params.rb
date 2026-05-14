@@ -21,15 +21,19 @@ namespace :params do
     the location with :path. For example:
     $ mina params:pull path=.env.local
 
+    Use upcase=true to transform variable names to upper-case:
+    $ mina params:pull upcase=true
+
     See params:read documentation for details on how params
     are fetched.
   TXT
   task pull: ['aws:profile:check'] do
     path = fetch(:path) || '.env'
+    upcase = fetch(:upcase) == 'true'
 
     env_file_path = File.join(Dir.pwd, path)
 
-    File.write(env_file_path, get_params.map(&:as_env).join("\n"))
+    File.write(env_file_path, get_params.map { |p| p.as_env(upcase:) }.join("\n"))
   end
 end
 
@@ -39,8 +43,10 @@ Param = Data.define(:name, :value) do
     name.split('/').last
   end
 
-  def as_env
-    "#{variable_name}=#{value}"
+  def as_env(upcase: false)
+    key = upcase ? variable_name.upcase : variable_name
+
+    "#{key}=#{value}"
   end
 end
 

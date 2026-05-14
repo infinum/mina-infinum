@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Enhancements
+- Add `upcase` argument to `params:pull` task which causes environment variable name to be upper-cased
+
+
 ## [v2.4.0](https://github.com/infinum/mina-infinum/tree/v-2.4.0) (2025-10-14)
 [Full Changelog](https://github.com/infinum/mina-infinum/compare/v2.3.0...v2.4.0)
 
