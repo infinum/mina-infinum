@@ -29,7 +29,7 @@ namespace :params do
   TXT
   task pull: ['aws:profile:check'] do
     path = fetch(:path) || '.env'
-    upcase = fetch(:upcase) == 'true'
+    upcase = fetch(:upcase, 'true').to_s == 'true'
 
     env_file_path = File.join(Dir.pwd, path)
 
